@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: np05c
+Build-Jdk: Microsoft OpenJDK 21.0.6
+
