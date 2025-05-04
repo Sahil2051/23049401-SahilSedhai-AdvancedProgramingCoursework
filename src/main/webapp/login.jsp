@@ -38,7 +38,7 @@
                 </div>
             <% } %>
             
-            <form class="auth-form" action="login" method="post">
+            <form class="auth-form" action="login" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <div class="input-group">

@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Household Supplies - SuperMart</title>
+    <title>Product Details - SuperMart</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -164,12 +164,12 @@
             justify-content: center;
             gap: 0.5rem;
             white-space: nowrap;
+            text-decoration: none;
         }
 
         .btn-primary {
             background-color: #4f46e5;
             color: white;
-            text-decoration: none;
         }
 
         .btn-outline {
@@ -183,131 +183,221 @@
             min-height: 100vh;
         }
 
-        .category-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .category-header h1 {
-            color: #4f46e5;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-        }
-
-        .category-header p {
-            color: #6b7280;
-            font-size: 1.1rem;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            padding: 1rem;
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        .product-card {
+        .product-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-gallery {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .product-title {
+            color: #111827;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            color: #4f46e5;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-description {
+            color: #6b7280;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .product-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        .meta-item svg {
+            color: #4f46e5;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            background: white;
+            color: #4b5563;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background: #f3f4f6;
+            color: #4f46e5;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        .related-products {
+            margin-top: 4rem;
+        }
+
+        .section-title {
+            color: #111827;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .related-card {
             background: white;
             border-radius: 1rem;
             overflow: hidden;
             transition: all 0.3s;
             border: 1px solid #e5e7eb;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
         }
 
-        .product-card:hover {
+        .related-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        .product-image {
+        .related-image {
             width: 100%;
-            height: 280px;
+            height: 200px;
             object-fit: cover;
         }
 
-        .product-info {
+        .related-info {
             padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
 
-        .product-info h3 {
+        .related-info h3 {
             color: #111827;
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .product-info p {
-            color: #6b7280;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .price {
-            font-weight: 600;
+        .related-price {
             color: #4f46e5;
-            font-size: 1.2rem;
-            margin-top: auto;
-            padding-top: 1rem;
-        }
-
-        .product-actions {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-
-        .add-to-cart-btn {
-            background-color: #4f46e5;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.2s;
-            flex: 1;
-            max-width: 200px;
-        }
-
-        .wishlist-btn {
-            background-color: transparent;
-            border: 1px solid #e5e7eb;
-            padding: 0.75rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            width: 48px;
-            height: 48px;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .cart-notification {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: white;
             border: 1px solid #e5e7eb;
             border-radius: 0.5rem;
             padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             z-index: 50;
             min-width: 300px;
             display: none;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .notification-title {
@@ -492,8 +582,14 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
         }
     </style>
 </head>
@@ -557,105 +653,100 @@
     </nav>
 
     <main class="main-content">
-        <div class="category-header">
-            <h1>Household Supplies</h1>
-            <p>Everything you need to keep your home clean and organized</p>
-        </div>
+        <div class="container">
+            <div class="product-details">
+                <div class="product-gallery">
+                    <img src="https://imgs.search.brave.com/bt_u2hiTpD7webBrgfNv63mW2DLd86WKRPGj15A1gVY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL1Mv/YXBsdXMtbWVkaWEt/bGlicmFyeS1zZXJ2/aWNlLW1lZGlhL2Uy/YzY5MmY4LWYzYjIt/NGE1Yi1hYzViLTQ1/ZWFmOWJkZTI0OC5f/X0NSMCwwLDk3MCw2/MDBfUFQwX1NYOTcw/X1YxX19fLmpwZw" alt="Premium Notebook" class="main-image">
+                    <div class="thumbnail-grid">
+                        <img src="https://imgs.search.brave.com/bt_u2hiTpD7webBrgfNv63mW2DLd86WKRPGj15A1gVY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL1Mv/YXBsdXMtbWVkaWEt/bGlicmFyeS1zZXJ2/aWNlLW1lZGlhL2Uy/YzY5MmY4LWYzYjIt/NGE1Yi1hYzViLTQ1/ZWFmOWJkZTI0OC5f/X0NSMCwwLDk3MCw2/MDBfUFQwX1NYOTcw/X1YxX19fLmpwZw" alt="Thumbnail 1" class="thumbnail">
+                        <img src="https://imgs.search.brave.com/JGaObmib5LQEPd5rGhXn-Zm4tLh-Sju7lEzifd09sDw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODFySm5KMk1Fbkwu/anBn" alt="Thumbnail 2" class="thumbnail">
+                        <img src="https://imgs.search.brave.com/eYMVDHVLTE1otkMhpCqzE2S_OJj1XecJ5LuD_R5J2wo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFyemdCOWdJWEwu/anBn" alt="Thumbnail 3" class="thumbnail">
+                        <img src="https://imgs.search.brave.com/HHiFrKbwWB9ye0fzswdYCrqATZePowZUaI0hZPC95UY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5tYWRlLWluLWNo/aW5hLmNvbS8xNTVm/MGowMHNvR2JPdWZx/blNrZy9BNC1QYXBl/ci1Db3BpZXItNTAw/LVNoZWV0cy1SZWFt/LTUtUmVhbXMtQm94/LUE0LUNvcHktUGFw/ZXIud2VicA" alt="Thumbnail 4" class="thumbnail">
+                    </div>
+                </div>
 
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="https://imgs.search.brave.com/kduWmk-AQgSjVnGSEzAwz9mPvBsIr1juYscHwxGx8sI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzA3/ODUvNDUwOS8yOTIx/L2ZpbGVzL0FUVElU/VURFLW5hdHVyZXBs/dXMtdnJhYzJMLWFs/bC1wdXJwb3NlLWNs/ZWFuZXItY2l0cnVz/LXplc3RfMS5qcGc_/dj0xNzE5NjA2MjYw/JndpZHRoPTIwMzIm/aGVpZ2h0PTIwMzIm/Y3JvcD1jZW50ZXI" alt="Cleaning Supplies" class="product-image">
                 <div class="product-info">
-                    <h3>All-Purpose Cleaner</h3>
-                    <p>Effective cleaning solution for multiple surfaces</p>
-                    <div class="price">$5.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart-btn" onclick="showNotification('All-Purpose Cleaner', 5.99)">Add To Cart</button>
-                        <button class="wishlist-btn" onclick="event.stopPropagation(); addToWishlist('All-Purpose Cleaner', 5.99)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <h1 class="product-title">Premium Notebook</h1>
+                    <div class="product-price">$12.99</div>
+                    <p class="product-description">
+                        High-quality paper for writing and note-taking. This premium notebook features smooth, acid-free paper that's perfect for both pen and pencil writing. The durable cover protects your notes while maintaining a professional appearance.
+                    </p>
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>In Stock</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                             </svg>
-                        </button>
+                            <span>Free Shipping</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                            <span>100 Pages</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                            </svg>
+                            <span>A4 Size</span>
+                        </div>
                     </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                        <input type="number" class="quantity-input" value="1" min="1" max="10" id="quantity">
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Add to Cart
+                    </button>
                 </div>
             </div>
-            <div class="product-card">
-                <img src="https://imgs.search.brave.com/y1u-FzqIAXSctZV9aVg5_jZltZDGAyl0BgHTR5s8EfE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFLK296cjFpOEwu/anBn" alt="Laundry Supplies" class="product-image">
-                <div class="product-info">
-                    <h3>Premium Detergent</h3>
-                    <p>High-efficiency laundry detergent</p>
-                    <div class="price">$14.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart-btn" onclick="showNotification('Premium Detergent', 14.99)">Add To Cart</button>
-                        <button class="wishlist-btn" onclick="event.stopPropagation(); addToWishlist('Premium Detergent', 14.99)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
+
+            <div class="related-products">
+                <h2 class="section-title">You May Also Like</h2>
+                <div class="related-grid">
+                    <div class="related-card">
+                        <img src="https://imgs.search.brave.com/JGaObmib5LQEPd5rGhXn-Zm4tLh-Sju7lEzifd09sDw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODFySm5KMk1Fbkwu/anBn" alt="Gel Pen Set" class="related-image">
+                        <div class="related-info">
+                            <h3>Gel Pen Set</h3>
+                            <div class="related-price">$4.99</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://imgs.search.brave.com/qNrU4l-jOSCUDes0fOENo-4qy7cSxa4i17S1l3eXuOc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODFLbmlRRCtDWUwu/anBn" alt="Bathroom Supplies" class="product-image">
-                <div class="product-info">
-                    <h3>Bathroom Essentials</h3>
-                    <p>Complete bathroom cleaning kit</p>
-                    <div class="price">$19.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart-btn" onclick="showNotification('Bathroom Essentials', 19.99)">Add To Cart</button>
-                        <button class="wishlist-btn" onclick="event.stopPropagation(); addToWishlist('Bathroom Essentials', 19.99)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
+                    <div class="related-card">
+                        <img src="https://imgs.search.brave.com/eYMVDHVLTE1otkMhpCqzE2S_OJj1XecJ5LuD_R5J2wo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFyemdCOWdJWEwu/anBn" alt="Heavy Duty Stapler" class="related-image">
+                        <div class="related-info">
+                            <h3>Heavy Duty Stapler</h3>
+                            <div class="related-price">$12.99</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://imgs.search.brave.com/SazCkj_albUX1t-bzmYpiAJkOIS8BUC9jDmn2Hfq-V0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzE2UDJZWTNnZkwu/anBn" alt="Kitchen Supplies" class="product-image">
-                <div class="product-info">
-                    <h3>Kitchen Cleaning Set</h3>
-                    <p>Specialized cleaners for kitchen surfaces</p>
-                    <div class="price">$16.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart-btn" onclick="showNotification('Kitchen Cleaning Set', 16.99)">Add To Cart</button>
-                        <button class="wishlist-btn" onclick="event.stopPropagation(); addToWishlist('Kitchen Cleaning Set', 16.99)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
+                    <div class="related-card">
+                        <img src="https://imgs.search.brave.com/HHiFrKbwWB9ye0fzswdYCrqATZePowZUaI0hZPC95UY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5tYWRlLWluLWNo/aW5hLmNvbS8xNTVm/MGowMHNvR2JPdWZx/blNrZy9BNC1QYXBl/ci1Db3BpZXItNTAw/LVNoZWV0cy1SZWFt/LTUtUmVhbXMtQm94/LUE0LUNvcHktUGFw/ZXIud2VicA" alt="A4 Paper Ream" class="related-image">
+                        <div class="related-info">
+                            <h3>A4 Paper Ream</h3>
+                            <div class="related-price">$6.99</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://imgs.search.brave.com/mLH5lHVKdNlsuH0byho7oSkrP91VoioOQcDTNnF0Ru8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL3ZhZGVyLXBy/b2QuczMuYW1hem9u/YXdzLmNvbS8xNjk3/MDM3Mzk2LTkxclJa/V2FvbUwuanBnP2Ny/b3A9MXh3OjEuMDB4/aDtjZW50ZXIsdG9w/JnJlc2l6ZT05ODA6/Kg" alt="Storage Solutions" class="product-image">
-                <div class="product-info">
-                    <h3>Storage Containers</h3>
-                    <p>Durable storage solutions for organization</p>
-                    <div class="price">$24.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart-btn" onclick="showNotification('Storage Containers', 24.99)">Add To Cart</button>
-                        <button class="wishlist-btn" onclick="event.stopPropagation(); addToWishlist('Storage Containers', 24.99)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://imgs.search.brave.com/BRiU5_wgO46cdr0MPKC2abtGcEBgWnIz_yp0K2DxgXw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/ODF3cUpIRWRaYkwu/anBn" alt="Household Tools" class="product-image">
-                <div class="product-info">
-                    <h3>Basic Tool Kit</h3>
-                    <p>Essential tools for home maintenance</p>
-                    <div class="price">$34.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart-btn" onclick="showNotification('Basic Tool Kit', 34.99)">Add To Cart</button>
-                        <button class="wishlist-btn" onclick="event.stopPropagation(); addToWishlist('Basic Tool Kit', 34.99)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
+                    <div class="related-card">
+                        <img src="https://imgs.search.brave.com/r5sZRGU6LkFkf8-Ev5TgEisGu36un294vc7s7whUSTY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YW5uYWJyZWdtYW5w/b3J0cmFpdHMuY28u/dWsvd3AtY29udGVu/dC91cGxvYWRzLzIw/MTQvMDgvQVJUSUNM/RVMtcGVuY2lsLXJl/dmlld3MtRmFiZXIt/Q2FzdGVsbDMuanBn" alt="Drawing Pencil Set" class="related-image">
+                        <div class="related-info">
+                            <h3>Drawing Pencil Set</h3>
+                            <div class="related-price">$14.99</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -668,6 +759,7 @@
         <div class="notification-title">Item Added To Cart</div>
         <div class="notification-content">
             <span id="notificationProductName"></span><br>
+            Quantity: <span id="notificationQuantity"></span><br>
             Price: $<span id="notificationProductPrice"></span>
         </div>
         <div class="notification-buttons">
@@ -677,16 +769,46 @@
     </div>
 
     <script>
-        function showNotification(productName, price) {
+        function decreaseQuantity() {
+            const input = document.getElementById('quantity');
+            if (input.value > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function increaseQuantity() {
+            const input = document.getElementById('quantity');
+            if (input.value < 10) {
+                input.value = parseInt(input.value) + 1;
+            }
+        }
+
+        function addToCart() {
+            const quantity = document.getElementById('quantity').value;
             const notification = document.getElementById('cartNotification');
-            document.getElementById('notificationProductName').textContent = productName;
-            document.getElementById('notificationProductPrice').textContent = price;
+            document.getElementById('notificationProductName').textContent = 'Premium Notebook';
+            document.getElementById('notificationQuantity').textContent = quantity;
+            document.getElementById('notificationProductPrice').textContent = (12.99 * quantity).toFixed(2);
             notification.style.display = 'block';
+            
+            // Add event listener for checkout button
+            const checkoutBtn = notification.querySelector('.checkout-btn');
+            checkoutBtn.onclick = function(e) {
+                e.preventDefault();
+                window.location.href = 'payment.jsp';
+            };
             
             setTimeout(() => {
                 notification.style.display = 'none';
             }, 3000);
         }
+
+        // Thumbnail click functionality
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                document.querySelector('.main-image').src = thumb.src;
+            });
+        });
     </script>
 </body>
 </html> 

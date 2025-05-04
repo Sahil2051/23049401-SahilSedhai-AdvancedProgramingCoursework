@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Supermarket Management System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="auth-page">
+<%--<%@ include file="includes/header.jsp" %>--%>
     <div class="auth-container full-screen">
         <div class="auth-content">
             <div class="auth-header">
@@ -75,5 +66,4 @@
             </div>
         </div>
     </div>
-</body>
-</html> 
+<%--<%@ include file="includes/footer.jsp" %>--%>
