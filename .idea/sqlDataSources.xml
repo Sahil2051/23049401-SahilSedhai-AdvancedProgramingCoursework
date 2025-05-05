@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="48aaf075-0a03-4c01-bc3b-e400b8007d72" name="supermarket_management_system Mapping">
+      <data-sources db="ff13648f-1d08-4447-8276-dd35f715c184" />
+      <scope>
+        <node kind="schema" qname="mysql" />
+      </scope>
+    </mapping>
+  </component>
+</project>
