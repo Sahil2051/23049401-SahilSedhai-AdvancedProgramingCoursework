@@ -164,6 +164,122 @@
             gap: 1rem;
             margin-top: 2rem;
         }
+
+        .report-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .report-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .report-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .report-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .report-items h3 {
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .items-table {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 1rem;
+            background: #f3f4f6;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .table-body {
+            padding: 0.5rem;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .report-summary {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            color: #4b5563;
+        }
+
+        .summary-row.total {
+            font-weight: 600;
+            color: #111827;
+            font-size: 1.1rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn i {
+            font-size: 1rem;
+        }
+
+        @media print {
+            .buttons, .report-actions {
+                display: none;
+            }
+            
+            .report-container {
+                box-shadow: none;
+                padding: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -227,12 +343,86 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="buttons">
-            <a href="dashboard.jsp" class="btn btn-primary">Continue Shopping</a>
-            <a href="profile.jsp" class="btn btn-outline">View Order History</a>
+            <div class="order-section">
+                <h2 class="section-title">Purchase Report</h2>
+                <div class="report-container">
+                    <div class="report-header">
+                        <div class="report-info">
+                            <p><strong>Order Date:</strong> <%= new java.text.SimpleDateFormat("MMMM dd, yyyy").format(new java.util.Date()) %></p>
+                            <p><strong>Order Time:</strong> <%= new java.text.SimpleDateFormat("HH:mm:ss").format(new java.util.Date()) %></p>
+                        </div>
+                    </div>
+                    
+                    <div class="report-items">
+                        <h3>Items Purchased</h3>
+                        <div class="items-table">
+                            <div class="table-header">
+                                <span>Item</span>
+                                <span>Quantity</span>
+                                <span>Price</span>
+                                <span>Total</span>
+                            </div>
+                            <div class="table-body">
+                                <!-- This will be populated dynamically with cart items -->
+                                <div class="table-row">
+                                    <span>Sample Item 1</span>
+                                    <span>2</span>
+                                    <span>$10.00</span>
+                                    <span>$20.00</span>
+                                </div>
+                                <div class="table-row">
+                                    <span>Sample Item 2</span>
+                                    <span>1</span>
+                                    <span>$15.00</span>
+                                    <span>$15.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>$35.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>Free</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (10%)</span>
+                            <span>$3.50</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Amount</span>
+                            <span>$38.50</span>
+                        </div>
+                    </div>
+
+                    <div class="report-actions">
+                        <button class="btn btn-primary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print Report
+                        </button>
+                        <button class="btn btn-outline" onclick="downloadPDF()">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <a href="dashboard.jsp" class="btn btn-primary">Continue Shopping</a>
+                <a href="profile.jsp" class="btn btn-outline">View Order History</a>
+            </div>
         </div>
     </div>
+
+    <script>
+        function downloadPDF() {
+            // This is a placeholder for PDF download functionality
+            alert('PDF download functionality will be implemented soon!');
+        }
+    </script>
 </body>
 </html> 
